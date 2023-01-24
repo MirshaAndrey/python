@@ -1,53 +1,36 @@
-from socket import fromfd
-from faker import Faker
-from faker.providers import internet
-from faker.providers import address
-<<<<<<< HEAD
-=======
+import random
+import string
 import uuid
->>>>>>> 437b3d25201cf337b6e42dc934701077c3008359
 
-fake = Faker('ru_RU')
-fake.add_provider(internet)
-print()
+from faker import Faker
 
-print('=Fake name=')
-for _ in range(3):  
-    print(fake.name())
-print()
+fake = Faker("ru_RU")
 
-<<<<<<< HEAD
-=======
+k = int(15)
 
 
-print('=Fake email=')
-for _ in range(3):  
-    print (str(uuid.uuid4()) + '@gmail.com')
-print()
+def generator_pw():
+    pwd = string.ascii_letters + string.digits + string.punctuation
+    return "".join(random.choice(pwd) for x in range(random.randint(k, k)))
 
 
->>>>>>> 437b3d25201cf337b6e42dc934701077c3008359
-print('=random address=')
-for _ in range(3):
-    print(fake.address())
-print()
+data = [
+    ["Название", "Данные"],
+    {
+        "Fake name": fake.name(),
+        "Password": generator_pw(),
+        "Fake email": str(uuid.uuid4()) + "@gmail.com",
+        "random address": fake.address(),
+        "City": fake.city(),
+        "ZipCode": fake.postcode(),
+        "IP address": fake.ipv4_private(),
+        "Company name": fake.company_suffix() + " " + fake.company(),
+    },
+]
 
-print('=City=')
-for _ in range(3):
-    print(fake.city())
-print()
-
-print('=ZipCode=')
-for _ in range(3):
-    print(fake.postcode())
-print()
-
-print('=IP address=')
-for _ in range(3):
-    print(fake.ipv4_private())
-print()
-
-print('=Company name=')
-for _ in range(3):
-    print(fake.company_suffix()+ ' ' + fake.company())
-print()
+print(
+    "{0:^14}|{1:^8}".format(*data[0]),
+    "-" * 15 + "+" + "-" * 58,
+    "\n".join("{0:<15}|{1:>58}".format(*i) for i in data[1].items()),
+    sep="\n",
+)
