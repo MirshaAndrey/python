@@ -1,11 +1,15 @@
 import random
 import string
 import uuid
+import colorama
+from colorama import init, Fore, Back
+
+init()
+
 
 from faker import Faker
 
 fake = Faker("ru_RU")
-
 k = int(15)
 
 
@@ -29,8 +33,10 @@ data = [
 ]
 
 print(
-    "{0:^14}|{1:^8}".format(*data[0]),
-    "-" * 15 + "+" + "-" * 58,
-    "\n".join("{0:<15}|{1:>58}".format(*i) for i in data[1].items()),
+    Fore.BLUE + "{0:^14}|{1:^8}".format(*data[0]),
+    "-" * 14 + "+" + "-" * 58,
+    "\n".join("{0:<14}|{1:>58}".format(*i) for i in data[1].items()),
     sep="\n",
 )
+
+print()
